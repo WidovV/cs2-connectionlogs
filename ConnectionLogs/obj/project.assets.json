@@ -58,11 +58,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Github\\cs2-cph\\plugins\\ConnectionLogs\\ConnectionLogs.csproj",
+      "projectUniqueName": "E:\\Github\\cs2-connectionlogs\\ConnectionLogs\\ConnectionLogs.csproj",
       "projectName": "ConnectionLogs",
-      "projectPath": "E:\\Github\\cs2-cph\\plugins\\ConnectionLogs\\ConnectionLogs.csproj",
+      "projectPath": "E:\\Github\\cs2-connectionlogs\\ConnectionLogs\\ConnectionLogs.csproj",
       "packagesPath": "C:\\Users\\snr7\\.nuget\\packages\\",
-      "outputPath": "E:\\Github\\cs2-cph\\plugins\\ConnectionLogs\\obj\\",
+      "outputPath": "E:\\Github\\cs2-connectionlogs\\ConnectionLogs\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

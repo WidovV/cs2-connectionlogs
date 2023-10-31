@@ -17,7 +17,6 @@ internal class CFG
     public void CheckConfig(string moduleDirectory)
     {
         string path = Path.Join(moduleDirectory, "config.json");
-        Console.WriteLine($"Config path: {path}");
 
         if (!File.Exists(path))
         {
@@ -30,7 +29,6 @@ internal class CFG
             // Deserialize the JSON from the file and load the configuration.
             config = JsonSerializer.Deserialize<Config>(sr.ReadToEnd());
         }
-        Console.WriteLine("Setting chat prefix");
         config.ChatPrefix = ModifiedChatPrefix(config.ChatPrefix);
     }
 
@@ -40,7 +38,6 @@ internal class CFG
     /// <param name="path">The path where the file should be created.</param>
     private static void CreateAndWriteFile(string path)
     {
-        Console.WriteLine("Creating file");
 
         using (FileStream fs = File.Create(path))
         {
@@ -73,26 +70,17 @@ internal class CFG
     // Essential method for replacing chat colors from the config file, the method can be used for other things as well.
     private string ModifiedChatPrefix(string msg)
     {
-        Console.WriteLine("ModifiedChatPrefix method");
         if (msg.Contains("{"))
         {
-            Console.WriteLine("Message contains {");
             string modifiedValue = msg;
             foreach (FieldInfo field in typeof(ChatColors).GetFields())
             {
-                Console.WriteLine("starting for loop");
                 string pattern = $"{{{field.Name}}}";
                 if (msg.Contains(pattern))
                 {
-                    Console.WriteLine($"Found prop value: {field.Name}");
                     modifiedValue = modifiedValue.Replace(pattern, field.GetValue(null).ToString());
                 }
-                else
-                {
-                    Console.WriteLine($"Prop was not found: {field.Name}");
-                }
             }
-            Console.WriteLine("Return modified");
             return modifiedValue;
         }
 

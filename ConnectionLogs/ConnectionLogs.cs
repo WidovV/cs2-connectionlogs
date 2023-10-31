@@ -20,11 +20,6 @@ public class ConnectionLogs : BasePlugin
         Console.ForegroundColor = ConsoleColor.Magenta;
         new CFG().CheckConfig(ModuleDirectory);
         Console.WriteLine($"[{DateTime.Now}] Loaded {ModuleName} ({ModuleVersion})");
-
-        foreach (PropertyInfo prop in CFG.config.GetType().GetProperties())
-        {
-            Console.WriteLine($"{prop.Name}: {prop.GetValue(CFG.config)}");
-        }
         Console.ResetColor();
 
         Console.WriteLine(Environment.NewLine + Environment.NewLine);

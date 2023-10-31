@@ -32,8 +32,8 @@ internal class DiscordClass
             using var client = new HttpClient();
             var content = new FormUrlEncodedContent(new[]
             {
-                    new KeyValuePair<string, string>("content", msg)
-                });
+                new KeyValuePair<string, string>("content", msg)
+            });
 
             // Discard
             await client.PostAsync(webhook, content);
