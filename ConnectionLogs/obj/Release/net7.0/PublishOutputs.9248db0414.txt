@@ -1,0 +1,4 @@
+E:\Github\CPH\plugins\ConnectionLogs\bin\Release\net7.0\publish\ConnectionLogs.dll
+E:\Github\CPH\plugins\ConnectionLogs\bin\Release\net7.0\publish\ConnectionLogs.deps.json
+E:\Github\CPH\plugins\ConnectionLogs\bin\Release\net7.0\publish\ConnectionLogs.pdb
+E:\Github\CPH\plugins\ConnectionLogs\bin\Release\net7.0\publish\CounterStrikeSharp.API.dll
