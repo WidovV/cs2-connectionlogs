@@ -14,7 +14,7 @@ internal class DiscordClass
     {
         string connectTypeString = connectType ? "connected" : "disconnected";
         // Get the current timestamp as a unix timestamp
-        return $"<t:{DateTimeOffset.Now.ToUnixTimeSeconds()}:T> {player.PlayerName} ({player.SteamID}) {connectTypeString}";
+        return $"<t:{DateTimeOffset.Now.ToUnixTimeSeconds()}:T> [{player.PlayerName}](<https://steamcommunity.com/profiles/{player.SteamID}>) `{player.SteamID}` {connectTypeString}";
     }
 
     /// <summary>
