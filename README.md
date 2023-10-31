@@ -13,5 +13,22 @@ It has a command !connectedplayers that prints the 50 recent players that joined
 ## Config
 The config will automaticly be generated on first run and will be placed inside of the same directory as the plugin itself.
 Colors can be used in the "ChatPrefix" like so {White} or {Red}, every color in the ChatColors class can be used.
+Example:
+```json
+{
+  "ChatPrefix": "[CPH-{Darkred}GAMING{White}]",
+
+  "SendMessageToDiscord": true,
+  "DiscordWebhook": "https://discord.com/api/webhooks/",
+
+  "StoreInDatabase": true,
+  "DatabaseHost": "192.168.1.210",
+  "DatabasePort": 3306,
+  "DatabaseUser": "WidovV",
+  "DatabasePassword": "MySuperSecretPassword",
+  "DatabaseName": "test-connectionlogs"
+}
+```
 
 ![Alt text](image.png)
+
