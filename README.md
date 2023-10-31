@@ -1,5 +1,7 @@
 # cs2-connectionlogs
- Replace `<HintPath>E:\Github\cs2-cph\API\CounterStrikeSharp.API.dll</HintPath>` inside of the ConnectionLogs.csproj and then run _compile.bat to compile the plugin, it will be placed in `\bin\Debug\net7.0` folder.
+ Create a folder called ConnectionLogs inside your /plugins/ folder.
+ Use the compiled versoin: Drag the files from `\bin\Release\net7.0\publish` inside of the ConnectionLogs folder except from `CounterStrikeSharp.API.dll`
+ Compile yourself: Replace `<HintPath>E:\Github\cs2-cph\API\CounterStrikeSharp.API.dll</HintPath>` inside of the ConnectionLogs.csproj and then run _compile.bat to compile the plugin, it will be placed in `\bin\Release\net7.0\publish` folder.
 
 # Dependencies
 - [CounterStrikeSharp](https://docs.cssharp.dev/)
