@@ -14,4 +14,4 @@ It has a command !connectedplayers that prints the 50 recent players that joined
 The config will automaticly be generated on first run and will be placed inside of the same directory as the plugin itself.
 Colors can be used in the "ChatPrefix" like so {White} or {Red}, every color in the ChatColors class can be used.
 
-
+![Alt text](image.png)
