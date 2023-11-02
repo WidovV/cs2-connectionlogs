@@ -33,7 +33,6 @@ internal class Cfg
         {
             if (prop.PropertyType != typeof(string))
             {
-                Console.WriteLine($"[connectionlog] Property: {prop.Name} is not typeof(string)");
                 continue;   
             }
 
