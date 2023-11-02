@@ -1,5 +1,6 @@
 ﻿using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
+using CounterStrikeSharp.API.Core.Attributes;
 using CounterStrikeSharp.API.Core.Attributes.Registration;
 using CounterStrikeSharp.API.Modules.Commands;
 using CounterStrikeSharp.API.Modules.Utils; // This is actually used
@@ -10,65 +11,69 @@ public class ConnectionLogs : BasePlugin
 {
     public override string ModuleName => "Connection logs";
 
-    public override string ModuleVersion => "0.1";
+    public override string ModuleVersion => "0.2";
+
+    public override string ModuleAuthor => "WidovV";
+    public override string ModuleDescription => "Logs client connections to a database and discord.";
     public override void Load(bool hotReload)
     {
         Console.WriteLine(Environment.NewLine + Environment.NewLine);
         Console.ForegroundColor = ConsoleColor.Magenta;
-        new CFG().CheckConfig(ModuleDirectory);
+        new Cfg().CheckConfig(ModuleDirectory);
         Console.WriteLine($"[{DateTime.Now}] Loaded {ModuleName} ({ModuleVersion})");
         Console.ResetColor();
 
         Console.WriteLine(Environment.NewLine + Environment.NewLine);
+
+        RegisterListener<Listeners.OnClientConnect>(Listener_OnClientConnectHandler);
+        RegisterListener<Listeners.OnClientDisconnect>(Listener_OnClientDisconnectHandler);
     }
 
-    // Make a method that prints to discord and does not use async
 
-    [GameEventHandler]
-    public HookResult OnClientConnect(EventPlayerConnectFull @event, GameEventInfo info)
+    private void Listener_OnClientConnectHandler(int playerSlot, string name, string ipAddress)
     {
-        if (IsClient.Bot(@event.Userid))
+        CCSPlayerController player = Utilities.GetPlayerFromSlot(playerSlot);
+
+        if (IsClient.Bot(player))
         {
-            return HookResult.Continue;
+            return;
         }
 
-        if (CFG.config.StoreInDatabase)
+        ipAddress = ipAddress.Split(':')[0];
+
+        if (Cfg.config.StoreInDatabase)
         {
-            Queries.InsertUser(@event.Userid.SteamID.ToString(), @event.Userid.PlayerName);
+            Queries.InsertUser(player.SteamID.ToString(), player.PlayerName, ipAddress);
         }
 
-        if (CFG.config.SendMessageToDiscord)
+        if (Cfg.config.SendMessageToDiscord)
         {
-            new DiscordClass().SendMessage(CFG.config.DiscordWebhook, true, @event.Userid);
+            new DiscordClass().SendMessage(Cfg.config.DiscordWebhook, true, player, ipAddress);
         }
-
-        return HookResult.Continue;
     }
 
-    [GameEventHandler(HookMode.Pre)]
-    public HookResult OnClientDisconnect(EventPlayerDisconnect @event, GameEventInfo info)
+    public void Listener_OnClientDisconnectHandler(int playerSlot)
     {
-        if (IsClient.Bot(@event.Userid))
+        CCSPlayerController player = Utilities.GetPlayerFromSlot(playerSlot);
+
+        if (IsClient.Bot(player))
         {
-            return HookResult.Continue;
+            return;
         }
 
-        if (CFG.config.SendMessageToDiscord)
+        if (Cfg.config.SendMessageToDiscord)
         {
-            new DiscordClass().SendMessage(CFG.config.DiscordWebhook, false, @event.Userid);
+            new DiscordClass().SendMessage(Cfg.config.DiscordWebhook, false, player);
         }
-
-        return HookResult.Continue;
     }
-
 
 
     [ConsoleCommand("connectedplayers", "get every connected player")]
     public void ConnectedPlayers(CCSPlayerController player, CommandInfo info)
     {
-        if (!CFG.config.StoreInDatabase)
+        if (!Cfg.config.StoreInDatabase)
         {
-            player.PrintToChat($"{CFG.config.ChatPrefix} This command is disabled");
+            player.PrintToChat($"{Cfg.config.ChatPrefix} This command is disabled");
             return;
         }
 
@@ -81,16 +86,16 @@ public class ConnectionLogs : BasePlugin
 
         if (player == null)
         {
-            foreach (var p in users)
+            foreach (User p in users)
             {
                 Server.PrintToConsole($"{p.ClientName} ({p.SteamId}) last joined: {p.ConnectedAt}");
             }
             return;
         }
 
-        foreach (var p in users)
+        foreach (User p in users)
         {
-            player.PrintToChat($"{CFG.config.ChatPrefix} {p.ClientName} ({p.SteamId}) last joined: {p.ConnectedAt}");
+            player.PrintToChat($"{Cfg.config.ChatPrefix} {p.ClientName} ({p.SteamId}) last joined: {p.ConnectedAt}");
         }
     }
 
@@ -100,11 +105,11 @@ public class ConnectionLogs : BasePlugin
         {
             if (player != null)
             {
-                player.PrintToChat($"{CFG.config.ChatPrefix} Usage: !connectedplayers");
+                player.PrintToChat($"{Cfg.config.ChatPrefix} Usage: !connectedplayers");
             }
             else
             {
-                Server.PrintToConsole($"{CFG.config.ChatPrefix} Usage: !connectedplayers");
+                Server.PrintToConsole($"{Cfg.config.ChatPrefix} Usage: !connectedplayers");
             }
 
             return false;

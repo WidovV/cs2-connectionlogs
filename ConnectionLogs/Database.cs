@@ -2,15 +2,7 @@
 using MySqlConnector;
 
 namespace ConnectedPlayers;
-/*
-CREATE TABLE Users (
-    Id INT PRIMARY KEY AUTO_INCREMENT,
-    SteamId VARCHAR(18) UNIQUE NOT NULL,
-    ClientName VARCHAR(128) NOT NULL,
-    ConnectedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
 
-*/
 internal class Database
 {
     /// <summary>
@@ -21,11 +13,11 @@ internal class Database
     /// </summary>
     private static readonly MySqlConnectionStringBuilder connection = new()
     {
-        Server = CFG.config.DatabaseHost,
-        Port = CFG.config.DatabasePort,
-        UserID = CFG.config.DatabaseUser,
-        Password = CFG.config.DatabasePassword,
-        Database = CFG.config.DatabaseName
+        Server = Cfg.config.DatabaseHost,
+        Port = Cfg.config.DatabasePort,
+        UserID = Cfg.config.DatabaseUser,
+        Password = Cfg.config.DatabasePassword,
+        Database = Cfg.config.DatabaseName
     };
 
     public static MySqlConnection GetConnection()

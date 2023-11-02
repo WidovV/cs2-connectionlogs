@@ -5,7 +5,7 @@ using System.Text.Json;
 
 namespace ConnectionLogs;
 
-internal class CFG
+internal class Cfg
 {
     public static Config config = new();
 
@@ -22,13 +22,23 @@ internal class CFG
             CreateAndWriteFile(path);
         }
 
-        using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
-        using (StreamReader sr = new StreamReader(fs))
+        using (FileStream fs = new(path, FileMode.Open, FileAccess.Read))
+        using (StreamReader sr = new(fs))
         {
             // Deserialize the JSON from the file and load the configuration.
             config = JsonSerializer.Deserialize<Config>(sr.ReadToEnd());
         }
-        config.ChatPrefix = ModifiedChatPrefix(config.ChatPrefix);
+
+        foreach (PropertyInfo prop in config.GetType().GetProperties())
+        {
+            if (prop.PropertyType != typeof(string))
+            {
+                Console.WriteLine($"[connectionlog] Property: {prop.Name} is not typeof(string)");
+                continue;   
+            }
+
+            prop.SetValue(config, ModifyColorValue(prop.GetValue(config).ToString()));
+        }
     }
 
     /// <summary>
@@ -67,17 +77,17 @@ internal class CFG
     }
 
     // Essential method for replacing chat colors from the config file, the method can be used for other things as well.
-    private string ModifiedChatPrefix(string msg)
+    private string ModifyColorValue(string msg)
     {
-        if (msg.Contains("{"))
+        if (msg.Contains('{'))
         {
             string modifiedValue = msg;
             foreach (FieldInfo field in typeof(ChatColors).GetFields())
             {
                 string pattern = $"{{{field.Name}}}";
-                if (msg.Contains(pattern))
+                if (msg.Contains(pattern, StringComparison.OrdinalIgnoreCase))
                 {
-                    modifiedValue = modifiedValue.Replace(pattern, field.GetValue(null).ToString());
+                    modifiedValue = modifiedValue.Replace(pattern, field.GetValue(null).ToString(), StringComparison.OrdinalIgnoreCase);
                 }
             }
             return modifiedValue;

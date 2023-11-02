@@ -15,7 +15,7 @@ namespace ConnectionLogs
         {
             try
             {
-                using var connection = Database.GetConnection();
+                using MySqlConnection connection = Database.GetConnection();
                 connection.Open();
                 CreateTable(connection);
                 connection.Close();
@@ -32,7 +32,7 @@ namespace ConnectionLogs
         /// </summary>
         /// <param name="steamId">The Steam ID of the user.</param>
         /// <param name="clientName">The name of the client.</param>
-        public static void InsertUser(string steamId, string clientName)
+        public static void InsertUser(string steamId, string clientName, string ipAddress)
         {
             if (!DatabaseConnected)
             {
@@ -45,12 +45,13 @@ namespace ConnectionLogs
                 return;
             }
 
-            using var connection = Database.GetConnection();
+            using MySqlConnection connection = Database.GetConnection();
 
-            using var command = connection.CreateCommand();
-            command.CommandText = "INSERT INTO Users (SteamId, ClientName) VALUES (@steamId, @clientName);";
+            using MySqlCommand command = connection.CreateCommand();
+            command.CommandText = "INSERT INTO Users (SteamId, ClientName, IpAddress) VALUES (@steamId, @clientName, @ipAddress);";
             command.Parameters.AddWithValue("@steamId", steamId);
             command.Parameters.AddWithValue("@clientName", clientName);
+            command.Parameters.AddWithValue("@ipAddress", ipAddress);
 
             connection.Open();
             command.ExecuteNonQuery();
@@ -64,9 +65,9 @@ namespace ConnectionLogs
         /// <returns>True if the user exists, false otherwise.</returns>
         public static bool UserExists(string steamId)
         {
-            using var connection = Database.GetConnection();
+            using MySqlConnection connection = Database.GetConnection();
 
-            using var command = connection.CreateCommand();
+            using MySqlCommand command = connection.CreateCommand();
             command.CommandText = "SELECT COUNT(*) FROM Users WHERE SteamId = @steamId;";
             command.Parameters.AddWithValue("@steamId", steamId);
 
@@ -85,17 +86,9 @@ namespace ConnectionLogs
         /// <param name="clientName">The name of the client to update for the user.</param>
         private static void UpdateUser(string steamId, string clientName)
         {
-            // Repetitive call that isn't actually needed since it's already checked in InsertUser
-            /*
-                if (!UserExists(steamId))
-                {
-                    return;
-                }
-            */
+            using MySqlConnection connection = Database.GetConnection();
 
-            using var connection = Database.GetConnection();
-
-            using var command = connection.CreateCommand();
+            using MySqlCommand command = connection.CreateCommand();
             // It should update the ConnectedAt automatically, but yeah it doesn't work
             command.CommandText = "UPDATE Users SET ClientName = @clientName, ConnectedAt = CURRENT_TIMESTAMP WHERE SteamId = @steamId;";
             command.Parameters.AddWithValue("@steamId", steamId);
@@ -116,12 +109,13 @@ namespace ConnectionLogs
         /// <param name="connection">The MySqlConnection object to use for creating the table.</param>
         private static void CreateTable(MySqlConnection connection)
         {
-            using var command = connection.CreateCommand();
+            using MySqlCommand command = connection.CreateCommand();
             command.CommandText = @"CREATE TABLE IF NOT EXISTS `Users` (
                                         `Id` int(11) NOT NULL AUTO_INCREMENT,
                                         `SteamId` varchar(18) NOT NULL,
                                         `ClientName` varchar(128) NOT NULL,
                                         `ConnectedAt` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+                                        `IpAddress` varchar(16) DEFAULT NULL,
                                         PRIMARY KEY (`Id`),
                                         UNIQUE KEY `SteamId` (`SteamId`)
                                     );";
@@ -141,14 +135,15 @@ namespace ConnectionLogs
                 return new();
             }
 
-            using var connection = Database.GetConnection();
+            using MySqlConnection connection = Database.GetConnection();
 
-            using var command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM Users ORDER BY ConnectedAt DESC LIMIT 50;";
+            using MySqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT Id, SteamId, ClientName, ConnectedAt FROM Users ORDER BY ConnectedAt DESC LIMIT 50;";
 
             connection.Open();
-            var reader = command.ExecuteReader();
-            var users = new List<User>();
+            MySqlDataReader reader = command.ExecuteReader();
+            List<User> users = new();
+
             while (reader.Read())
             {
                 users.Add(new User
