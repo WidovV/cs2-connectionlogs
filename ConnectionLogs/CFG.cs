@@ -78,21 +78,22 @@ internal class Cfg
     // Essential method for replacing chat colors from the config file, the method can be used for other things as well.
     private string ModifyColorValue(string msg)
     {
-        if (msg.Contains('{'))
+        if (!msg.Contains('{'))
         {
-            string modifiedValue = msg;
-            foreach (FieldInfo field in typeof(ChatColors).GetFields())
-            {
-                string pattern = $"{{{field.Name}}}";
-                if (msg.Contains(pattern, StringComparison.OrdinalIgnoreCase))
-                {
-                    modifiedValue = modifiedValue.Replace(pattern, field.GetValue(null).ToString(), StringComparison.OrdinalIgnoreCase);
-                }
-            }
-            return modifiedValue;
+            return string.IsNullOrEmpty(msg) ? "[ConnectionLog]" : msg;
         }
 
-        return string.IsNullOrEmpty(msg) ? "[ConnectionLog]" : msg;
+        string modifiedValue = msg;
+        foreach (FieldInfo field in typeof(ChatColors).GetFields())
+        {
+            string pattern = $"{{{field.Name}}}";
+            if (msg.Contains(pattern, StringComparison.OrdinalIgnoreCase))
+            {
+                modifiedValue = modifiedValue.Replace(pattern, field.GetValue(null).ToString(), StringComparison.OrdinalIgnoreCase);
+            }
+        }
+        return modifiedValue;
+        
     }
 }
 
