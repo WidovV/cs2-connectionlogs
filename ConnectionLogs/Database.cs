@@ -21,7 +21,7 @@ internal class Database
         Database = Cfg.Config.DatabaseName
     };
 
-    private static MySqlConnection? globalConnection;
+    public static MySqlConnection? globalConnection;
 
     public static MySqlConnection GetConnection()
     {

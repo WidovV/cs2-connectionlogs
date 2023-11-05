@@ -77,7 +77,7 @@ namespace ConnectionLogs
             return Convert.ToInt32(result) > 0;
         }
 
- 
+
         /// <summary>
         /// Updates the user with the given Steam ID and client name in the database.
         /// </summary>
@@ -94,7 +94,6 @@ namespace ConnectionLogs
             // Escpae the shit out of this
             command.Parameters.AddWithValue("@clientName", MySqlHelper.EscapeString(clientName));
 
-            
             command.ExecuteNonQuery();
             connection.Close();
         }
