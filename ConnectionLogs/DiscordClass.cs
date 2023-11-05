@@ -16,9 +16,10 @@ internal class DiscordClass
         string connectTypeString = connectType ? "connected" : "disconnected";
 
         string message = $"<t:{DateTimeOffset.Now.ToUnixTimeSeconds()}:T> [{player.PlayerName}](<https://steamcommunity.com/profiles/{player.SteamID}>) `{player.SteamID}` {connectTypeString}";
+        
         if (ipAddress != null)
         {
-            message += $" with ip `{ipAddress}`";
+            message += $" <`{ipAddress}`>";
         }
 
         return message;

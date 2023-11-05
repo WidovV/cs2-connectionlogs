@@ -12,7 +12,7 @@ public class ConnectionLogs : BasePlugin
 {
     public override string ModuleName => "Connection logs";
 
-    public override string ModuleVersion => "0.2";
+    public override string ModuleVersion => "0.2.1";
 
     public override string ModuleAuthor => "WidovV";
     public override string ModuleDescription => "Logs client connections to a database and discord.";
