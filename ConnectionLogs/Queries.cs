@@ -5,11 +5,12 @@ namespace ConnectionLogs
 {
     internal class Queries
     {
-        public static void InsertNewClient(MySqlDb Db, CCSPlayerController player)
+        public static void InsertNewClient(MySqlDb Db, CCSPlayerController player, string ip)
         {
             MySqlQueryValue values = new MySqlQueryValue()
                                     .Add("ClientName", player.PlayerName)
-                                    .Add("SteamId", player.SteamID.ToString());
+                                    .Add("SteamId", player.SteamID.ToString())
+                                    .Add("IpAddress", ip);
 
             Db!.Table("Users").InsertIfNotExistAsync(values, $"`ClientName` = '{player.PlayerName}'");
         }

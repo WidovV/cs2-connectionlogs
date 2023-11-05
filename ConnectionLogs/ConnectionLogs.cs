@@ -55,7 +55,7 @@ public class ConnectionLogs : BasePlugin
 
         if (Cfg.Config.StoreInDatabase)
         {
-            Queries.InsertNewClient(Db, player);
+            Queries.InsertNewClient(Db, player, ipAddress);
         }
 
         if (Cfg.Config.SendMessageToDiscord)
