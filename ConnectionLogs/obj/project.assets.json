@@ -14,6 +14,18 @@
             "related": ".xml"
           }
         }
+      },
+      "Nexd.MySQL/1.0.1": {
+        "type": "package",
+        "dependencies": {
+          "MySqlConnector": "2.2.7"
+        },
+        "compile": {
+          "lib/net7.0/Nexd.MySQL.dll": {}
+        },
+        "runtime": {
+          "lib/net7.0/Nexd.MySQL.dll": {}
+        }
       }
     }
   },
@@ -44,11 +56,25 @@
         "mysqlconnector.2.2.7.nupkg.sha512",
         "mysqlconnector.nuspec"
       ]
+    },
+    "Nexd.MySQL/1.0.1": {
+      "sha512": "Z7+FBaVDfXfz6jL8rP7nWmKCj1Zr6Qz31REh/cwH07c/QLfqBNUyDknUHF4GVdbYPfWV15M+dh1RxZLkoIL0KQ==",
+      "type": "package",
+      "path": "nexd.mysql/1.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "README.md",
+        "lib/net7.0/Nexd.MySQL.dll",
+        "nexd.mysql.1.0.1.nupkg.sha512",
+        "nexd.mysql.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     "net7.0": [
-      "MySqlConnector >= 2.2.7"
+      "Nexd.MySQL >= 1.0.1"
     ]
   },
   "packageFolders": {
@@ -96,9 +122,9 @@
       "net7.0": {
         "targetAlias": "net7.0",
         "dependencies": {
-          "MySqlConnector": {
+          "Nexd.MySQL": {
             "target": "Package",
-            "version": "[2.2.7, )"
+            "version": "[1.0.1, )"
           }
         },
         "imports": [

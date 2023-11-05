@@ -45,9 +45,9 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
-            "MySqlConnector": {
+            "Nexd.MySQL": {
               "target": "Package",
-              "version": "[2.2.7, )"
+              "version": "[1.0.1, )"
             }
           },
           "imports": [

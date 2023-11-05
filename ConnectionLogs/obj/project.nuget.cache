@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "Ymj8e9011CX2iuYa4hrnf0o2ZiSxqEm419qzXkGHxF9J83EIJO2/KgLpfLmmcp31YkNtwkQ17mHgKsIgnrgpNg==",
+  "dgSpecHash": "HcUxEvwhqagpR1vEgkq9/TitFNLEbi5IwKNkNuLqeuWgTw/YKDSXEIXxYdguFLMMeVTdy3e9apNbZsN7tzAp0Q==",
   "success": true,
   "projectFilePath": "E:\\Github\\cs2-connectionlogs\\ConnectionLogs\\ConnectionLogs.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\snr7\\.nuget\\packages\\mysqlconnector\\2.2.7\\mysqlconnector.2.2.7.nupkg.sha512"
+    "C:\\Users\\snr7\\.nuget\\packages\\mysqlconnector\\2.2.7\\mysqlconnector.2.2.7.nupkg.sha512",
+    "C:\\Users\\snr7\\.nuget\\packages\\nexd.mysql\\1.0.1\\nexd.mysql.1.0.1.nupkg.sha512"
   ],
   "logs": []
 }

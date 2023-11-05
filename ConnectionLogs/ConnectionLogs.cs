@@ -4,6 +4,7 @@ using CounterStrikeSharp.API.Core.Attributes;
 using CounterStrikeSharp.API.Core.Attributes.Registration;
 using CounterStrikeSharp.API.Modules.Commands;
 using CounterStrikeSharp.API.Modules.Utils; // This is actually used
+using Nexd.MySQL;
 
 namespace ConnectionLogs;
 
@@ -15,6 +16,8 @@ public class ConnectionLogs : BasePlugin
 
     public override string ModuleAuthor => "WidovV";
     public override string ModuleDescription => "Logs client connections to a database and discord.";
+
+    private MySqlDb Db = null;
     public override void Load(bool hotReload)
     {
         Console.WriteLine(Environment.NewLine + Environment.NewLine);
@@ -24,6 +27,16 @@ public class ConnectionLogs : BasePlugin
         Console.ResetColor();
 
         Console.WriteLine(Environment.NewLine + Environment.NewLine);
+        Db = new(Cfg.Config.DatabaseHost, Cfg.Config.DatabaseUser, Cfg.Config.DatabasePassword, Cfg.Config.DatabaseName, Cfg.Config.DatabasePort);
+        Db.ExecuteNonQueryAsync(@"CREATE TABLE IF NOT EXISTS `Users` (
+                                        `Id` int(11) NOT NULL AUTO_INCREMENT,
+                                        `SteamId` varchar(18) NOT NULL,
+                                        `ClientName` varchar(128) NOT NULL,
+                                        `ConnectedAt` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+                                        `IpAddress` varchar(16) DEFAULT NULL,
+                                        PRIMARY KEY (`Id`),
+                                        UNIQUE KEY `SteamId` (`SteamId`)
+                                    );");
 
         RegisterListener<Listeners.OnClientConnect>(Listener_OnClientConnectHandler);
         RegisterListener<Listeners.OnClientDisconnect>(Listener_OnClientDisconnectHandler);
@@ -42,7 +55,7 @@ public class ConnectionLogs : BasePlugin
 
         if (Cfg.Config.StoreInDatabase)
         {
-            Queries.InsertUser(player.SteamID.ToString(), player.PlayerName, ipAddress);
+            Queries.InsertNewClient(Db, player);
         }
 
         if (Cfg.Config.SendMessageToDiscord)
@@ -81,7 +94,7 @@ public class ConnectionLogs : BasePlugin
             return;
         }
 
-        List<User> users = Queries.GetConnectedPlayers();
+        List<User> users = Queries.GetConnectedPlayers(Db);
 
         if (users.Count == 0)
         {

@@ -105,7 +105,7 @@ internal class Config
     public string? DiscordWebhook { get; set; }
     public bool StoreInDatabase { get; set; }
     public string? DatabaseHost { get; set; }
-    public uint DatabasePort { get; set; }
+    public int DatabasePort { get; set; }
     public string? DatabaseUser { get; set; }
     public string? DatabasePassword { get; set; }
     public string? DatabaseName { get; set; }
