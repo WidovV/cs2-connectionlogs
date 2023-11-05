@@ -29,41 +29,41 @@ public class ConnectionLogs : BasePlugin
         RegisterListener<Listeners.OnClientDisconnect>(Listener_OnClientDisconnectHandler);
     }
 
-
     private void Listener_OnClientConnectHandler(int playerSlot, string name, string ipAddress)
     {
         CCSPlayerController player = Utilities.GetPlayerFromSlot(playerSlot);
 
-        if (IsClient.Bot(player))
+        if (!IsValid.Client(playerSlot + 1))
         {
             return;
         }
 
         ipAddress = ipAddress.Split(':')[0];
 
-        if (Cfg.config.StoreInDatabase)
+        if (Cfg.Config.StoreInDatabase)
         {
             Queries.InsertUser(player.SteamID.ToString(), player.PlayerName, ipAddress);
         }
 
-        if (Cfg.config.SendMessageToDiscord)
+        if (Cfg.Config.SendMessageToDiscord)
         {
-            new DiscordClass().SendMessage(Cfg.config.DiscordWebhook, true, player, ipAddress);
+            new DiscordClass().SendMessage(Cfg.Config.DiscordWebhook, true, player, ipAddress);
         }
     }
+
 
     public void Listener_OnClientDisconnectHandler(int playerSlot)
     {
         CCSPlayerController player = Utilities.GetPlayerFromSlot(playerSlot);
 
-        if (IsClient.Bot(player))
+        if (!IsValid.Client(playerSlot + 1))
         {
             return;
         }
 
-        if (Cfg.config.SendMessageToDiscord)
+        if (Cfg.Config.SendMessageToDiscord)
         {
-            new DiscordClass().SendMessage(Cfg.config.DiscordWebhook, false, player);
+            new DiscordClass().SendMessage(Cfg.Config.DiscordWebhook, false, player);
         }
     }
 
@@ -71,9 +71,8 @@ public class ConnectionLogs : BasePlugin
     [ConsoleCommand("connectedplayers", "get every connected player")]
     public void ConnectedPlayers(CCSPlayerController player, CommandInfo info)
     {
-        if (!Cfg.config.StoreInDatabase)
+        if (!Cfg.Config.StoreInDatabase)
         {
-            player.PrintToChat($"{Cfg.config.ChatPrefix} This command is disabled");
             return;
         }
 
@@ -84,18 +83,23 @@ public class ConnectionLogs : BasePlugin
 
         List<User> users = Queries.GetConnectedPlayers();
 
-        if (player == null)
+        if (users.Count == 0)
         {
-            foreach (User p in users)
-            {
-                Server.PrintToConsole($"{p.ClientName} ({p.SteamId}) last joined: {p.ConnectedAt}");
-            }
+            player.PrintToChat($"{Cfg.Config.ChatPrefix} No connected players");
             return;
         }
 
+        bool ValidPlayer = player != null;
+
         foreach (User p in users)
         {
-            player.PrintToChat($"{Cfg.config.ChatPrefix} {p.ClientName} ({p.SteamId}) last joined: {p.ConnectedAt}");
+            if (!ValidPlayer)
+            {
+                Server.PrintToConsole($"{p.ClientName} ({p.SteamId}) last joined: {p.ConnectedAt}");
+                continue;
+            }
+
+            player.PrintToChat($"{Cfg.Config.ChatPrefix} {p.ClientName} ({p.SteamId}) last joined: {p.ConnectedAt}");
         }
     }
 
@@ -105,16 +109,15 @@ public class ConnectionLogs : BasePlugin
         {
             if (player != null)
             {
-                player.PrintToChat($"{Cfg.config.ChatPrefix} Usage: !connectedplayers");
+                player.PrintToChat($"{Cfg.Config.ChatPrefix} Usage: !connectedplayers");
             }
             else
             {
-                Server.PrintToConsole($"{Cfg.config.ChatPrefix} Usage: !connectedplayers");
+                Server.PrintToConsole($"{Cfg.Config.ChatPrefix} Usage: !connectedplayers");
             }
-
+            
             return false;
         }
-
         return true;
     }
 }

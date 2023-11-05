@@ -5,18 +5,17 @@ namespace ConnectionLogs
 {
     internal class Queries
     {
-        private static bool DatabaseConnected = DatabaseConnection();
+        private static MySqlConnection Connection => Database.GetConnection();
 
         /// <summary>
         /// Checks if a connection to the database can be established and creates a table if it doesn't exist.
         /// </summary>
         /// <returns>True if a connection to the database was established and the table was created, false otherwise.</returns>
-        private static bool DatabaseConnection()
+        private static bool DatabaseConnected()
         {
             try
             {
                 using MySqlConnection connection = Database.GetConnection();
-                connection.Open();
                 CreateTable(connection);
                 connection.Close();
                 return true;
@@ -34,7 +33,7 @@ namespace ConnectionLogs
         /// <param name="clientName">The name of the client.</param>
         public static void InsertUser(string steamId, string clientName, string ipAddress)
         {
-            if (!DatabaseConnected)
+            if (!DatabaseConnected())
             {
                 return;
             }
@@ -53,7 +52,7 @@ namespace ConnectionLogs
             command.Parameters.AddWithValue("@clientName", clientName);
             command.Parameters.AddWithValue("@ipAddress", ipAddress);
 
-            connection.Open();
+            
             command.ExecuteNonQuery();
             connection.Close();
         }
@@ -71,7 +70,7 @@ namespace ConnectionLogs
             command.CommandText = "SELECT COUNT(*) FROM Users WHERE SteamId = @steamId;";
             command.Parameters.AddWithValue("@steamId", steamId);
 
-            connection.Open();
+            
             var result = command.ExecuteScalar();
             connection.Close();
 
@@ -95,7 +94,7 @@ namespace ConnectionLogs
             // Escpae the shit out of this
             command.Parameters.AddWithValue("@clientName", MySqlHelper.EscapeString(clientName));
 
-            connection.Open();
+            
             command.ExecuteNonQuery();
             connection.Close();
         }
@@ -130,7 +129,7 @@ namespace ConnectionLogs
         /// <returns>A list of User objects representing the connected players.</returns>
         public static List<User> GetConnectedPlayers()
         {
-            if (!DatabaseConnected)
+            if (!DatabaseConnected())
             {
                 return new();
             }
@@ -140,7 +139,7 @@ namespace ConnectionLogs
             using MySqlCommand command = connection.CreateCommand();
             command.CommandText = "SELECT Id, SteamId, ClientName, ConnectedAt FROM Users ORDER BY ConnectedAt DESC LIMIT 50;";
 
-            connection.Open();
+            
             MySqlDataReader reader = command.ExecuteReader();
             List<User> users = new();
 

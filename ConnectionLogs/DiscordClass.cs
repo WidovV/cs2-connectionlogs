@@ -47,7 +47,7 @@ internal class DiscordClass
         catch (Exception ex)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"Failed to send message to discord.\n{ex.Message}");
+
             Console.ResetColor();
         }
     }

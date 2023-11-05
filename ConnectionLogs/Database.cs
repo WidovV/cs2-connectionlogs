@@ -1,5 +1,6 @@
 ﻿using ConnectionLogs;
 using MySqlConnector;
+using System.Data;
 
 namespace ConnectedPlayers;
 
@@ -13,15 +14,23 @@ internal class Database
     /// </summary>
     private static readonly MySqlConnectionStringBuilder connection = new()
     {
-        Server = Cfg.config.DatabaseHost,
-        Port = Cfg.config.DatabasePort,
-        UserID = Cfg.config.DatabaseUser,
-        Password = Cfg.config.DatabasePassword,
-        Database = Cfg.config.DatabaseName
+        Server = Cfg.Config.DatabaseHost,
+        Port = Cfg.Config.DatabasePort,
+        UserID = Cfg.Config.DatabaseUser,
+        Password = Cfg.Config.DatabasePassword,
+        Database = Cfg.Config.DatabaseName
     };
+
+    private static MySqlConnection? globalConnection;
 
     public static MySqlConnection GetConnection()
     {
-        return new MySqlConnection(connection.ConnectionString);
+        if (globalConnection == null || globalConnection.State == ConnectionState.Closed)
+        {
+            globalConnection = new MySqlConnection(connection.ConnectionString);
+            globalConnection.Open();
+        }
+
+        return globalConnection;
     }
 }
