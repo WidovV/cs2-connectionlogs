@@ -17,15 +17,15 @@ namespace ConnectionLogs
 
         private static void UpdateUser(MySqlDb Db, string steamId, string clientName)
         {
-            MySqlQueryValue values = new MySqlQueryValue()
-                                    .Add("ClientName", clientName);
+            MySqlQueryValue values = new MySqlQueryValue().Add("ClientName", clientName);
 
             Db.Table("Users").Where(MySqlQueryCondition.New("SteamId", "=", steamId)).UpdateAsync(values);
         }
 
         public static List<User> GetConnectedPlayers(MySqlDb Db)
         {
-            MySqlQueryResult result = Db.Table("Users").ExecuteQueryAsync("SELECT Id, SteamId, ClientName, ConnectedAt FROM `Users` ORDER BY `ConnectedAt` DESC LIMIT 50").Result;
+            MySqlQueryResult result = Db.Table("Users")
+                .ExecuteQueryAsync("SELECT Id, SteamId, ClientName, ConnectedAt FROM `Users` ORDER BY `ConnectedAt` DESC LIMIT 50").Result;
 
             if (result.Rows < 1)
             {

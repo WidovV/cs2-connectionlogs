@@ -46,7 +46,7 @@ public class ConnectionLogs : BasePlugin
     {
         CCSPlayerController player = Utilities.GetPlayerFromSlot(playerSlot);
 
-        if (!IsValid.Client(playerSlot + 1))
+        if (!IsValid.Client(playerSlot + 1) || player.IsBot)
         {
             return;
         }

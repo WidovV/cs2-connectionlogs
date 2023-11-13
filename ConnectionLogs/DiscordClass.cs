@@ -19,7 +19,7 @@ internal class DiscordClass
         
         if (ipAddress != null)
         {
-            message += $" <`{ipAddress}`>";
+            message += $" [{ipAddress}](<https://geoiplookup.net/ip/{ipAddress}>)";
         }
 
         return message;
