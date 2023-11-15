@@ -81,7 +81,7 @@ internal class Cfg
     {
         if (!msg.Contains('{'))
         {
-            return string.IsNullOrEmpty(msg) ? "[ConnectionLog]" : msg;
+            return string.IsNullOrEmpty(msg) ? "[ConnectionLogs]" : msg;
         }
 
         string modifiedValue = msg;
