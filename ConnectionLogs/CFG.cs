@@ -59,6 +59,7 @@ internal class Cfg
         {
             ChatPrefix = "[ConnectionLogs]",
             SendMessageToDiscord = false,
+            PrintIpToDiscord = true,
             DiscordWebhook = "https://discord.com/api/webhooks/",
             StoreInDatabase = false,
             DatabaseHost = "localhost",
@@ -102,6 +103,7 @@ internal class Config
 {
     public string? ChatPrefix { get; set; }
     public bool SendMessageToDiscord { get; set; }
+    public bool PrintIpToDiscord { get; set; }
     public string? DiscordWebhook { get; set; }
     public bool StoreInDatabase { get; set; }
     public string? DatabaseHost { get; set; }

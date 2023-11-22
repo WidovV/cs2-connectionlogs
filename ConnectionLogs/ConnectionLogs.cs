@@ -5,6 +5,7 @@ using CounterStrikeSharp.API.Core.Attributes.Registration;
 using CounterStrikeSharp.API.Modules.Commands;
 using CounterStrikeSharp.API.Modules.Utils; // This is actually used
 using Nexd.MySQL;
+using System.Net;
 
 namespace ConnectionLogs;
 
@@ -12,20 +13,17 @@ public class ConnectionLogs : BasePlugin
 {
     public override string ModuleName => "Connection logs";
 
-    public override string ModuleVersion => "0.2.1";
+    public override string ModuleVersion => "0.3";
 
     public override string ModuleAuthor => "WidovV";
     public override string ModuleDescription => "Logs client connections to a database and discord.";
 
     private MySqlDb Db = null;
+
+    private string[] ips = new string[Server.MaxPlayers + 1];
     public override void Load(bool hotReload)
     {
-        Console.WriteLine(Environment.NewLine + Environment.NewLine);
-        Console.ForegroundColor = ConsoleColor.Magenta;
         new Cfg().CheckConfig(ModuleDirectory);
-        Console.WriteLine($"[{DateTime.Now}] Loaded {ModuleName} ({ModuleVersion})");
-        Console.ResetColor();
-
         Console.WriteLine(Environment.NewLine + Environment.NewLine);
         Db = new(Cfg.Config.DatabaseHost, Cfg.Config.DatabaseUser, Cfg.Config.DatabasePassword, Cfg.Config.DatabaseName, Cfg.Config.DatabasePort);
         Db.ExecuteNonQueryAsync(@"CREATE TABLE IF NOT EXISTS `Users` (
@@ -40,9 +38,20 @@ public class ConnectionLogs : BasePlugin
 
         RegisterListener<Listeners.OnClientConnect>(Listener_OnClientConnectHandler);
         RegisterListener<Listeners.OnClientDisconnect>(Listener_OnClientDisconnectHandler);
+        RegisterListener<Listeners.OnClientPutInServer>(Listener_OnClientPutInServerHandler);
+
+        Console.WriteLine(Environment.NewLine + Environment.NewLine);
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        Console.WriteLine($"[{DateTime.Now}] Loaded {ModuleName} ({ModuleVersion}) by {ModuleAuthor}\n{ModuleDescription}");
+        Console.ResetColor();
     }
 
     private void Listener_OnClientConnectHandler(int playerSlot, string name, string ipAddress)
+    {
+        ips[playerSlot] = ipAddress.Split(':')[0];
+    }
+
+    private void Listener_OnClientPutInServerHandler(int playerSlot)
     {
         CCSPlayerController player = Utilities.GetPlayerFromSlot(playerSlot);
 
@@ -51,16 +60,14 @@ public class ConnectionLogs : BasePlugin
             return;
         }
 
-        ipAddress = ipAddress.Split(':')[0];
-
         if (Cfg.Config.StoreInDatabase)
         {
-            Queries.InsertNewClient(Db, player, ipAddress);
+            Queries.InsertNewClient(Db, player, ips[playerSlot]);
         }
 
         if (Cfg.Config.SendMessageToDiscord)
         {
-            new DiscordClass().SendMessage(Cfg.Config.DiscordWebhook, true, player, ipAddress);
+            new DiscordClass().SendMessage( true, player, ips[playerSlot]);
         }
     }
 
@@ -76,8 +83,10 @@ public class ConnectionLogs : BasePlugin
 
         if (Cfg.Config.SendMessageToDiscord)
         {
-            new DiscordClass().SendMessage(Cfg.Config.DiscordWebhook, false, player);
+            new DiscordClass().SendMessage( false, player);
         }
+
+        ips[playerSlot] = string.Empty;
     }
 
 

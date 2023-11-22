@@ -9,7 +9,7 @@
       "ConnectionLogs/1.0.0": {
         "dependencies": {
           "Nexd.MySQL": "1.0.1",
-          "CounterStrikeSharp.API": "1.0.0.0"
+          "CounterStrikeSharp.API": "1.0.66.0"
         },
         "runtime": {
           "ConnectionLogs.dll": {}
@@ -34,11 +34,11 @@
           }
         }
       },
-      "CounterStrikeSharp.API/1.0.0.0": {
+      "CounterStrikeSharp.API/1.0.66.0": {
         "runtime": {
           "CounterStrikeSharp.API.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
+            "assemblyVersion": "1.0.66.0",
+            "fileVersion": "1.0.66.0"
           }
         }
       }
@@ -64,7 +64,7 @@
       "path": "nexd.mysql/1.0.1",
       "hashPath": "nexd.mysql.1.0.1.nupkg.sha512"
     },
-    "CounterStrikeSharp.API/1.0.0.0": {
+    "CounterStrikeSharp.API/1.0.66.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
