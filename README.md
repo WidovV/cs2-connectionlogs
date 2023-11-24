@@ -1,4 +1,4 @@
-# cs2-connectionlogs Version 0.2
+# cs2-connectionlogs Version 0.3
  Create a folder called ConnectionLogs inside your /plugins/ folder.  
  
  Use the compiled version: Drag the files from `\bin\Release\net7.0\publish` inside of the ConnectionLogs folder except from `CounterStrikeSharp.API.dll`  
