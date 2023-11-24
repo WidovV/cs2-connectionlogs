@@ -90,7 +90,7 @@ public class ConnectionLogs : BasePlugin
     }
 
 
-    [ConsoleCommand("connectedplayers", "get every connected player")]
+    [ConsoleCommand("css_connectedplayers", "get every connected player")]
     public void ConnectedPlayers(CCSPlayerController player, CommandInfo info)
     {
         if (!Cfg.Config.StoreInDatabase)
