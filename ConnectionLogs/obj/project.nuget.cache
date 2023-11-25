@@ -1,11 +1,27 @@
 {
   "version": 2,
-  "dgSpecHash": "fJBAVsqKC1wFTtEMxhhKZehmoUAQk0GP2DRdYsb24dLAwiVoEn5oYjpjSciGm5h6XP+pIjtxLmx+gXMtP5eUBw==",
+  "dgSpecHash": "GkRwi2iP7DjMZEx2OTrQinjDiZKzf27cnJHp8i+3bG4Qq5+V9fjJOcBT+eHuG7cPlmMiXEv/cjYiItOcDDf4jQ==",
   "success": true,
   "projectFilePath": "E:\\Github\\cs2-connectionlogs\\ConnectionLogs\\ConnectionLogs.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\snr7\\.nuget\\packages\\counterstrikesharp.api\\1.0.72\\counterstrikesharp.api.1.0.72.nupkg.sha512",
+    "C:\\Users\\snr7\\.nuget\\packages\\mcmaster.netcore.plugins\\1.4.0\\mcmaster.netcore.plugins.1.4.0.nupkg.sha512",
+    "C:\\Users\\snr7\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "C:\\Users\\snr7\\.nuget\\packages\\microsoft.dotnet.platformabstractions\\3.1.6\\microsoft.dotnet.platformabstractions.3.1.6.nupkg.sha512",
+    "C:\\Users\\snr7\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\7.0.0\\microsoft.extensions.dependencyinjection.7.0.0.nupkg.sha512",
+    "C:\\Users\\snr7\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\snr7\\.nuget\\packages\\microsoft.extensions.dependencymodel\\5.0.0\\microsoft.extensions.dependencymodel.5.0.0.nupkg.sha512",
+    "C:\\Users\\snr7\\.nuget\\packages\\microsoft.extensions.logging\\7.0.0\\microsoft.extensions.logging.7.0.0.nupkg.sha512",
+    "C:\\Users\\snr7\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\7.0.0\\microsoft.extensions.logging.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\snr7\\.nuget\\packages\\microsoft.extensions.options\\7.0.0\\microsoft.extensions.options.7.0.0.nupkg.sha512",
+    "C:\\Users\\snr7\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512",
     "C:\\Users\\snr7\\.nuget\\packages\\mysqlconnector\\2.2.7\\mysqlconnector.2.2.7.nupkg.sha512",
-    "C:\\Users\\snr7\\.nuget\\packages\\nexd.mysql\\1.0.1\\nexd.mysql.1.0.1.nupkg.sha512"
+    "C:\\Users\\snr7\\.nuget\\packages\\nexd.mysql\\1.0.1\\nexd.mysql.1.0.1.nupkg.sha512",
+    "C:\\Users\\snr7\\.nuget\\packages\\serilog\\3.1.0\\serilog.3.1.0.nupkg.sha512",
+    "C:\\Users\\snr7\\.nuget\\packages\\serilog.extensions.logging\\7.0.0\\serilog.extensions.logging.7.0.0.nupkg.sha512",
+    "C:\\Users\\snr7\\.nuget\\packages\\serilog.sinks.console\\5.0.0\\serilog.sinks.console.5.0.0.nupkg.sha512",
+    "C:\\Users\\snr7\\.nuget\\packages\\serilog.sinks.file\\5.0.0\\serilog.sinks.file.5.0.0.nupkg.sha512",
+    "C:\\Users\\snr7\\.nuget\\packages\\system.data.datasetextensions\\4.5.0\\system.data.datasetextensions.4.5.0.nupkg.sha512"
   ],
   "logs": []
 }
