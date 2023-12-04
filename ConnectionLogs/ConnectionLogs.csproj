@@ -7,6 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Nexd.MySQL" Version="1.0.1" />
+    <PackageReference Include="Nexd.MySQL" Version="1.0.2" />
   </ItemGroup>
 </Project>
