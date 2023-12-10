@@ -17,16 +17,17 @@ internal class DiscordClass
     {
         string connectTypeString = connectType ? "connected to" : "disconnected from";
 
-        StringBuilder messageBuilder = new StringBuilder();
-        messageBuilder.Append($"<t:{DateTimeOffset.Now.ToUnixTimeSeconds()}:T> [{player.PlayerName}](<https://steamcommunity.com/profiles/{player.SteamID}>)(`{player.SteamID}`) {connectTypeString} {serverName}");
+        StringBuilder messageBuilder = new();
+        messageBuilder.Append($"<t:{DateTimeOffset.Now.ToUnixTimeSeconds()}:T> [{player.PlayerName}](<https://steamcommunity.com/profiles/{player.SteamID}>)(`{player.SteamID}`)");
 
         if (!Cfg.Config.PrintIpToDiscord)
         {
+            messageBuilder.Append($" {connectTypeString} {serverName}");
             return messageBuilder.ToString();
         }
 
         messageBuilder.Append($" [{player.IpAddress.Split(':')[0]}](<https://geoiplookup.net/ip/{player.IpAddress.Split(':')[0]}>)");
-
+        messageBuilder.Append($" {connectTypeString} {serverName}");
 
         return messageBuilder.ToString();
     }
@@ -45,17 +46,15 @@ internal class DiscordClass
             string msg = DiscordContent(connectType, player, serverName);
             Task.Run(() =>
             {
-                using (HttpClient? client = new())
-                using (StringContent? content = new($"{{\"content\":\"{msg}\"}}", Encoding.UTF8, "application/json"))
-                {
-                    HttpResponseMessage resp = client.PostAsync(Cfg.Config.DiscordWebhook, content).Result;
+                using HttpClient? client = new();
+                using StringContent? content = new($"{{\"content\":\"{msg}\"}}", Encoding.UTF8, "application/json");
+                using HttpResponseMessage resp = client.PostAsync(Cfg.Config.DiscordWebhook, content).Result;
 
-                    if (!resp.IsSuccessStatusCode)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine($"[{DateTime.Now}] Failed to send message to Discord: {resp.StatusCode}");
-                        Console.ResetColor();
-                    }
+                if (!resp.IsSuccessStatusCode)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"[{DateTime.Now}] Failed to send message to Discord: {resp.StatusCode}");
+                    Console.ResetColor();
                 }
             });
         }
