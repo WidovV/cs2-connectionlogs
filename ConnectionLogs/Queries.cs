@@ -5,26 +5,26 @@ namespace ConnectionLogs
 {
     internal class Queries
     {
-        public static void InsertNewClient(MySqlDb Db, CCSPlayerController player, string ip)
+        public static void InsertNewClient(MySqlDb? db, CCSPlayerController player, string ip)
         {
             MySqlQueryValue values = new MySqlQueryValue()
                                     .Add("ClientName", player.PlayerName)
                                     .Add("SteamId", player.SteamID.ToString())
                                     .Add("IpAddress", ip);
 
-            Db!.Table("Users").InsertIfNotExistAsync(values, $"`ClientName` = '{player.PlayerName}'");
+            db!.Table("Users").InsertIfNotExistAsync(values, $"`ClientName` = '{player.PlayerName}'");
         }
 
-        private static void UpdateUser(MySqlDb Db, string steamId, string clientName)
+        private static void UpdateUser(MySqlDb db, string steamId, string clientName)
         {
             MySqlQueryValue values = new MySqlQueryValue().Add("ClientName", clientName);
 
-            Db.Table("Users").Where(MySqlQueryCondition.New("SteamId", "=", steamId)).UpdateAsync(values);
+            db.Table("Users").Where(MySqlQueryCondition.New("SteamId", "=", steamId)).UpdateAsync(values);
         }
 
-        public static List<User> GetConnectedPlayers(MySqlDb Db)
+        public static List<User> GetConnectedPlayers(MySqlDb? db)
         {
-            MySqlQueryResult result = Db.Table("Users")
+            MySqlQueryResult result = db.Table("Users")
                 .ExecuteQueryAsync("SELECT Id, SteamId, ClientName, ConnectedAt FROM `Users` ORDER BY `ConnectedAt` DESC LIMIT 50").Result;
 
             if (result.Rows < 1)

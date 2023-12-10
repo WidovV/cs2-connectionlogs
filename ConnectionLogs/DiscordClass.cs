@@ -1,5 +1,6 @@
 ﻿using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
+using System.Net;
 using System.Text;
 
 namespace ConnectionLogs;
@@ -12,22 +13,20 @@ internal class DiscordClass
     /// <param name="connectType">A boolean indicating whether the player has connected or disconnected.</param>
     /// <param name="player">The player whose connection status is being logged.</param>
     /// <returns>A string containing the player's name, Steam ID, connection status, and timestamp.</returns>
-    private string DiscordContent(bool connectType, CCSPlayerController player, string ipAddress)
+    private string DiscordContent(bool connectType, CCSPlayerController player, string serverName)
     {
-        string connectTypeString = connectType ? "connected" : "disconnected";
+        string connectTypeString = connectType ? "connected to" : "disconnected from";
 
         StringBuilder messageBuilder = new StringBuilder();
-        messageBuilder.Append($"<t:{DateTimeOffset.Now.ToUnixTimeSeconds()}:T> [{player.PlayerName}](<https://steamcommunity.com/profiles/{player.SteamID}>) `{player.SteamID}` {connectTypeString}");
+        messageBuilder.Append($"<t:{DateTimeOffset.Now.ToUnixTimeSeconds()}:T> [{player.PlayerName}](<https://steamcommunity.com/profiles/{player.SteamID}>)(`{player.SteamID}`) {connectTypeString} {serverName}");
 
         if (!Cfg.Config.PrintIpToDiscord)
         {
             return messageBuilder.ToString();
         }
 
-        if (!string.IsNullOrEmpty(ipAddress))
-        {
-            messageBuilder.Append($" [{ipAddress}](<https://geoiplookup.net/ip/{ipAddress}>)");
-        }
+        messageBuilder.Append($" [{player.IpAddress.Split(':')[0]}](<https://geoiplookup.net/ip/{player.IpAddress.Split(':')[0]}>)");
+
 
         return messageBuilder.ToString();
     }
@@ -39,11 +38,11 @@ internal class DiscordClass
     /// <param name="webhook">The Discord webhook URL to send the message to.</param>
     /// <param name="connectType">A boolean indicating whether the player is connecting or disconnecting.</param>
     /// <param name="player">The CCSPlayerController object representing the player.</param>
-    public void SendMessage(bool connectType, CCSPlayerController player, string ipAddress = null)
+    public void SendMessage(bool connectType, CCSPlayerController player, string serverName)
     {
         try
         {
-            string msg = DiscordContent(connectType, player, ipAddress);
+            string msg = DiscordContent(connectType, player, serverName);
             Task.Run(() =>
             {
                 using (HttpClient? client = new())

@@ -1,11 +1,9 @@
 ﻿using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
-using CounterStrikeSharp.API.Core.Attributes;
 using CounterStrikeSharp.API.Core.Attributes.Registration;
 using CounterStrikeSharp.API.Modules.Commands;
-using CounterStrikeSharp.API.Modules.Utils; // This is actually used
+using CounterStrikeSharp.API.Modules.Cvars;
 using Nexd.MySQL;
-using System.Net;
 
 namespace ConnectionLogs;
 
@@ -18,15 +16,14 @@ public class ConnectionLogs : BasePlugin
     public override string ModuleAuthor => "WidovV";
     public override string ModuleDescription => "Logs client connections to a database and discord.";
 
-    private MySqlDb Db = null;
-
-    private string[] ips = new string[Server.MaxPlayers + 1];
+    private MySqlDb? _db;
+    private string? _serverName;
     public override void Load(bool hotReload)
     {
         new Cfg().CheckConfig(ModuleDirectory);
         Console.WriteLine(Environment.NewLine + Environment.NewLine);
-        Db = new(Cfg.Config.DatabaseHost, Cfg.Config.DatabaseUser, Cfg.Config.DatabasePassword, Cfg.Config.DatabaseName, Cfg.Config.DatabasePort);
-        Db.ExecuteNonQueryAsync(@"CREATE TABLE IF NOT EXISTS `Users` (
+        _db = new(Cfg.Config.DatabaseHost ?? string.Empty, Cfg.Config.DatabaseUser ?? string.Empty, Cfg.Config.DatabasePassword ?? string.Empty, Cfg.Config.DatabaseName ?? string.Empty, Cfg.Config.DatabasePort);
+        _db.ExecuteNonQueryAsync(@"CREATE TABLE IF NOT EXISTS `Users` (
                                         `Id` int(11) NOT NULL AUTO_INCREMENT,
                                         `SteamId` varchar(18) NOT NULL,
                                         `ClientName` varchar(128) NOT NULL,
@@ -36,9 +33,9 @@ public class ConnectionLogs : BasePlugin
                                         UNIQUE KEY `SteamId` (`SteamId`)
                                     );");
 
-        RegisterListener<Listeners.OnClientConnect>(Listener_OnClientConnectHandler);
         RegisterListener<Listeners.OnClientDisconnect>(Listener_OnClientDisconnectHandler);
         RegisterListener<Listeners.OnClientPutInServer>(Listener_OnClientPutInServerHandler);
+        RegisterListener<Listeners.OnMapStart>(Listener_OnMapStartHandler);
 
         Console.WriteLine(Environment.NewLine + Environment.NewLine);
         Console.ForegroundColor = ConsoleColor.Magenta;
@@ -46,10 +43,7 @@ public class ConnectionLogs : BasePlugin
         Console.ResetColor();
     }
 
-    private void Listener_OnClientConnectHandler(int playerSlot, string name, string ipAddress)
-    {
-        ips[playerSlot] = ipAddress.Split(':')[0];
-    }
+    private void Listener_OnMapStartHandler(string mapName) => _serverName = ConVar.Find(("hostname")).StringValue;
 
     private void Listener_OnClientPutInServerHandler(int playerSlot)
     {
@@ -62,12 +56,12 @@ public class ConnectionLogs : BasePlugin
 
         if (Cfg.Config.StoreInDatabase)
         {
-            Queries.InsertNewClient(Db, player, ips[playerSlot]);
+            Queries.InsertNewClient(_db, player, player.IpAddress?.Split(':')[0] ?? string.Empty);
         }
 
         if (Cfg.Config.SendMessageToDiscord)
         {
-            new DiscordClass().SendMessage( true, player, ips[playerSlot]);
+            new DiscordClass().SendMessage( true, player, _serverName);
         }
     }
 
@@ -83,14 +77,13 @@ public class ConnectionLogs : BasePlugin
 
         if (Cfg.Config.SendMessageToDiscord)
         {
-            new DiscordClass().SendMessage( false, player);
+            new DiscordClass().SendMessage( false, player, _serverName);
         }
-
-        ips[playerSlot] = string.Empty;
     }
 
-
+    
     [ConsoleCommand("css_connectedplayers", "get every connected player")]
+    [CommandHelper(usage: "css_connectedplayers", whoCanExecute: CommandUsage.CLIENT_AND_SERVER)]
     public void ConnectedPlayers(CCSPlayerController player, CommandInfo info)
     {
         if (!Cfg.Config.StoreInDatabase)
@@ -98,12 +91,12 @@ public class ConnectionLogs : BasePlugin
             return;
         }
 
-        if (!IsValidCommandUsage(player, info.ArgCount))
+        if (info.ArgCount != 1)
         {
             return;
         }
 
-        List<User> users = Queries.GetConnectedPlayers(Db);
+        List<User> users = Queries.GetConnectedPlayers(_db);
 
         if (users.Count == 0)
         {
@@ -111,35 +104,17 @@ public class ConnectionLogs : BasePlugin
             return;
         }
 
-        bool ValidPlayer = player != null;
+        bool validPlayer = player != null;
 
         foreach (User p in users)
         {
-            if (!ValidPlayer)
+            if (!validPlayer)
             {
                 Server.PrintToConsole($"{p.ClientName} ({p.SteamId}) last joined: {p.ConnectedAt}");
                 continue;
             }
 
-            player.PrintToChat($"{Cfg.Config.ChatPrefix} {p.ClientName} ({p.SteamId}) last joined: {p.ConnectedAt}");
+            player?.PrintToChat($"{Cfg.Config.ChatPrefix} {p.ClientName} ({p.SteamId}) last joined: {p.ConnectedAt}");
         }
-    }
-
-    private bool IsValidCommandUsage(CCSPlayerController player, int args)
-    {
-        if (args != 1)
-        {
-            if (player != null)
-            {
-                player.PrintToChat($"{Cfg.Config.ChatPrefix} Usage: !connectedplayers");
-            }
-            else
-            {
-                Server.PrintToConsole($"{Cfg.Config.ChatPrefix} Usage: !connectedplayers");
-            }
-            
-            return false;
-        }
-        return true;
     }
 }
