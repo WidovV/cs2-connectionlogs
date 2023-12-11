@@ -1,13 +1,15 @@
-﻿using CounterStrikeSharp.API;
+﻿using System.Reflection;
+using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
 using CounterStrikeSharp.API.Core.Attributes.Registration;
+using CounterStrikeSharp.API.Modules.Admin;
 using CounterStrikeSharp.API.Modules.Commands;
 using CounterStrikeSharp.API.Modules.Cvars;
 using Nexd.MySQL;
 
 namespace ConnectionLogs;
 
-public class ConnectionLogs : BasePlugin
+public class ConnectionLogs : BasePlugin, IPluginConfig<StandardConfig>
 {
     public override string ModuleName => "Connection logs";
 
@@ -18,11 +20,12 @@ public class ConnectionLogs : BasePlugin
 
     private MySqlDb? _db;
     private string? _serverName;
+
+    public required StandardConfig Config { get; set; }
+
     public override void Load(bool hotReload)
     {
-        new Cfg().CheckConfig(ModuleDirectory);
-        Console.WriteLine(Environment.NewLine + Environment.NewLine);
-        _db = new(Cfg.Config.DatabaseHost ?? string.Empty, Cfg.Config.DatabaseUser ?? string.Empty, Cfg.Config.DatabasePassword ?? string.Empty, Cfg.Config.DatabaseName ?? string.Empty, Cfg.Config.DatabasePort);
+        _db = new(Config.DatabaseHost ?? string.Empty, Config.DatabaseUser ?? string.Empty, Config.DatabasePassword ?? string.Empty, Config.DatabaseName ?? string.Empty, Config.DatabasePort);
         _db.ExecuteNonQueryAsync(@"CREATE TABLE IF NOT EXISTS `Users` (
                                         `Id` int(11) NOT NULL AUTO_INCREMENT,
                                         `SteamId` varchar(18) NOT NULL,
@@ -36,14 +39,9 @@ public class ConnectionLogs : BasePlugin
         RegisterListener<Listeners.OnClientDisconnect>(Listener_OnClientDisconnectHandler);
         RegisterListener<Listeners.OnClientPutInServer>(Listener_OnClientPutInServerHandler);
         RegisterListener<Listeners.OnMapStart>(Listener_OnMapStartHandler);
-
-        Console.WriteLine(Environment.NewLine + Environment.NewLine);
-        Console.ForegroundColor = ConsoleColor.Magenta;
-        Console.WriteLine($"[{DateTime.Now}] Loaded {ModuleName} ({ModuleVersion}) by {ModuleAuthor}\n{ModuleDescription}");
-        Console.ResetColor();
     }
 
-    private void Listener_OnMapStartHandler(string mapName) => _serverName = ConVar.Find(("hostname")).StringValue;
+    private void Listener_OnMapStartHandler(string mapName) => _serverName = ConVar.Find(("hostname")).StringValue ?? "Server";
 
     private void Listener_OnClientPutInServerHandler(int playerSlot)
     {
@@ -54,14 +52,14 @@ public class ConnectionLogs : BasePlugin
             return;
         }
 
-        if (Cfg.Config.StoreInDatabase)
+        if (Config.StoreInDatabase)
         {
             Queries.InsertNewClient(_db, player, player.IpAddress?.Split(':')[0] ?? string.Empty);
         }
 
-        if (Cfg.Config.SendMessageToDiscord)
+        if (Config.SendMessageToDiscord)
         {
-            new DiscordClass().SendMessage( true, player, _serverName);
+            new DiscordClass().SendMessage(Config, true, player, _serverName);
         }
     }
 
@@ -75,18 +73,19 @@ public class ConnectionLogs : BasePlugin
             return;
         }
 
-        if (Cfg.Config.SendMessageToDiscord)
+        if (Config.SendMessageToDiscord)
         {
-            new DiscordClass().SendMessage( false, player, _serverName);
+            new DiscordClass().SendMessage(Config, false, player, _serverName);
         }
     }
 
     
     [ConsoleCommand("css_connectedplayers", "get every connected player")]
     [CommandHelper(usage: "css_connectedplayers", whoCanExecute: CommandUsage.CLIENT_AND_SERVER)]
+    [RequiresPermissionsOr("@css/changemap", "@css/rcon")]
     public void ConnectedPlayers(CCSPlayerController player, CommandInfo info)
     {
-        if (!Cfg.Config.StoreInDatabase)
+        if (!Config.StoreInDatabase)
         {
             return;
         }
@@ -100,7 +99,7 @@ public class ConnectionLogs : BasePlugin
 
         if (users.Count == 0)
         {
-            player.PrintToChat($"{Cfg.Config.ChatPrefix} No connected players");
+            player.PrintToChat($"{Config.ChatPrefix} No connected players");
             return;
         }
 
@@ -114,7 +113,38 @@ public class ConnectionLogs : BasePlugin
                 continue;
             }
 
-            player?.PrintToChat($"{Cfg.Config.ChatPrefix} {p.ClientName} ({p.SteamId}) last joined: {p.ConnectedAt}");
+            player?.PrintToChat($"{Config.ChatPrefix} {p.ClientName} ({p.SteamId}) last joined: {p.ConnectedAt}");
         }
+    }
+
+    public void OnConfigParsed(StandardConfig standardConfig)
+    {
+        foreach (PropertyInfo property in typeof(StandardConfig).GetProperties())
+        {
+            if (property.GetValue(standardConfig) == null)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"[{DateTime.Now}] {property.Name} is null, please fix this in the standardConfig file.");
+                Console.ResetColor();
+                continue;
+            }
+
+            // Check if the property is a string
+            if (property.PropertyType == typeof(string))
+            {
+                // Check if the property is empty
+                if (string.IsNullOrEmpty(property.GetValue(standardConfig).ToString()))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"[{DateTime.Now}] {property.Name} is empty, please fix this in the standardConfig file.");
+                    Console.ResetColor();
+                    continue;
+                }
+                
+                property.SetValue(standardConfig, Cfg.ModifyColorValue(property.GetValue(standardConfig).ToString()));
+            }
+        }
+
+        Config = standardConfig;
     }
 }
