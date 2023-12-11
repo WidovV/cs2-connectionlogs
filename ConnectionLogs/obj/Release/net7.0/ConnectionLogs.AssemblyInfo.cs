@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ConnectionLogs")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9705155c584d909bee3a9e1c05572d727a117ae0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+368d3ce8adc0dc28db402679defd2bed9800d933")]
 [assembly: System.Reflection.AssemblyProductAttribute("ConnectionLogs")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ConnectionLogs")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

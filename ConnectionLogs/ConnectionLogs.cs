@@ -82,11 +82,11 @@ public class ConnectionLogs : BasePlugin, IPluginConfig<StandardConfig>
     
     [ConsoleCommand("css_connectedplayers", "get every connected player")]
     [CommandHelper(usage: "css_connectedplayers", whoCanExecute: CommandUsage.CLIENT_AND_SERVER)]
-    [RequiresPermissionsOr("@css/changemap", "@css/rcon")]
     public void ConnectedPlayers(CCSPlayerController player, CommandInfo info)
     {
         if (!Config.StoreInDatabase)
         {
+            player.PrintToChat($"{Config.ChatPrefix} This command is disabled");
             return;
         }
 
