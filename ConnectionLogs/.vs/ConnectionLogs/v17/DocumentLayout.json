@@ -67,7 +67,7 @@
               "RelativeDocumentMoniker": "ConnectionLogs.cs",
               "ToolTip": "E:\\Github\\cs2-connectionlogs\\ConnectionLogs\\ConnectionLogs.cs",
               "RelativeToolTip": "ConnectionLogs.cs",
-              "ViewState": "AQIAABIAAAAAAAAAAAAMwCwAAAAAAAAA",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAQwCkAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2023-11-05T17:34:28.938Z",
               "EditorCaption": ""
@@ -82,7 +82,8 @@
               "RelativeToolTip": "..\\..\\cs2-cph\\plugins\\MetaInfoBlocker\\DiscordClass.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-11-23T00:29:21.598Z"
+              "WhenOpened": "2023-11-23T00:29:21.598Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -94,7 +95,8 @@
               "RelativeToolTip": "CPH.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-11-22T22:13:52.553Z"
+              "WhenOpened": "2023-11-22T22:13:52.553Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -106,7 +108,8 @@
               "RelativeToolTip": "DiscordClass.cs",
               "ViewState": "AQIAABkAAAAAAAAAAAAMwCYAAAA9AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-11-05T17:46:23.405Z"
+              "WhenOpened": "2023-11-05T17:46:23.405Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -130,7 +133,8 @@
               "RelativeToolTip": "Cfg.cs",
               "ViewState": "AQIAAA4AAAAAAAAAAAAswCMAAAA7AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-11-15T15:54:55.898Z"
+              "WhenOpened": "2023-11-15T15:54:55.898Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -142,7 +146,8 @@
               "RelativeToolTip": "User.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-11-05T17:35:13.014Z"
+              "WhenOpened": "2023-11-05T17:35:13.014Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -154,7 +159,8 @@
               "RelativeToolTip": "Queries.cs",
               "ViewState": "AQIAAA0AAAAAAAAAAAAgwA4AAABmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-11-05T17:34:45.91Z"
+              "WhenOpened": "2023-11-05T17:34:45.91Z",
+              "EditorCaption": ""
             }
           ]
         }
