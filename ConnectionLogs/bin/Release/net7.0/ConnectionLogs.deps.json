@@ -8,19 +8,20 @@
     ".NETCoreApp,Version=v7.0": {
       "ConnectionLogs/1.0.0": {
         "dependencies": {
-          "CounterStrikeSharp.API": "1.0.117",
+          "CounterStrikeSharp.API": "1.0.124",
           "Nexd.MySQL": "1.0.2"
         },
         "runtime": {
           "ConnectionLogs.dll": {}
         }
       },
-      "CounterStrikeSharp.API/1.0.117": {
+      "CounterStrikeSharp.API/1.0.124": {
         "dependencies": {
           "McMaster.NETCore.Plugins": "1.4.0",
           "Microsoft.CSharp": "4.7.0",
           "Microsoft.Extensions.Hosting": "7.0.0",
           "Microsoft.Extensions.Hosting.Abstractions": "7.0.0",
+          "Microsoft.Extensions.Localization.Abstractions": "7.0.3",
           "Microsoft.Extensions.Logging": "7.0.0",
           "Scrutor": "4.2.2",
           "Serilog.Extensions.Logging": "7.0.0",
@@ -30,8 +31,8 @@
         },
         "runtime": {
           "lib/net7.0/CounterStrikeSharp.API.dll": {
-            "assemblyVersion": "1.0.117.0",
-            "fileVersion": "1.0.117.0"
+            "assemblyVersion": "1.0.124.0",
+            "fileVersion": "1.0.124.0"
           }
         }
       },
@@ -265,6 +266,14 @@
           "lib/net7.0/Microsoft.Extensions.Hosting.Abstractions.dll": {
             "assemblyVersion": "7.0.0.0",
             "fileVersion": "7.0.22.51805"
+          }
+        }
+      },
+      "Microsoft.Extensions.Localization.Abstractions/7.0.3": {
+        "runtime": {
+          "lib/net7.0/Microsoft.Extensions.Localization.Abstractions.dll": {
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "7.0.323.8009"
           }
         }
       },
@@ -516,12 +525,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "CounterStrikeSharp.API/1.0.117": {
+    "CounterStrikeSharp.API/1.0.124": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-oz/fZjOZiZ9pQNVpUDsypz3HRUcd0n+oQ4t7s6Y3haBUDyWgfjFtK5/dc7bOX9MaxGod/6KrmlLbxkIPKR9fzw==",
-      "path": "counterstrikesharp.api/1.0.117",
-      "hashPath": "counterstrikesharp.api.1.0.117.nupkg.sha512"
+      "sha512": "sha512-VVJiqDTx1eNbDkiTN/qA+gOhVWWGSPXxEQHYRci23/h8OrsNoevK6C33IgtqK9gngvN52yHPzrKSf4WKHPOsZw==",
+      "path": "counterstrikesharp.api/1.0.124",
+      "hashPath": "counterstrikesharp.api.1.0.124.nupkg.sha512"
     },
     "McMaster.NETCore.Plugins/1.4.0": {
       "type": "package",
@@ -655,6 +664,13 @@
       "sha512": "sha512-43n9Je09z0p/7ViPxfRqs5BUItRLNVh5b6JH40F2Agkh2NBsY/jpNYTtbCcxrHCsA3oRmbR6RJBzUutB4VZvNQ==",
       "path": "microsoft.extensions.hosting.abstractions/7.0.0",
       "hashPath": "microsoft.extensions.hosting.abstractions.7.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Localization.Abstractions/7.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-2sEhpRPiWY3iJ+nxHnLUqM8qNoGqQQqduk0QXd3iEt0fc4fw8EwFElqtT4OJMV0qnGGAwYykdOtrzZ1BIqdvpQ==",
+      "path": "microsoft.extensions.localization.abstractions/7.0.3",
+      "hashPath": "microsoft.extensions.localization.abstractions.7.0.3.nupkg.sha512"
     },
     "Microsoft.Extensions.Logging/7.0.0": {
       "type": "package",

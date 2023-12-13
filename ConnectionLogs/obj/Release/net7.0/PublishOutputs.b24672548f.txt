@@ -1,6 +1,0 @@
-E:\Github\cs2-connectionlogs\ConnectionLogs\bin\Release\net7.0\publish\ConnectionLogs.dll
-E:\Github\cs2-connectionlogs\ConnectionLogs\bin\Release\net7.0\publish\ConnectionLogs.deps.json
-E:\Github\cs2-connectionlogs\ConnectionLogs\bin\Release\net7.0\publish\ConnectionLogs.pdb
-E:\Github\cs2-connectionlogs\ConnectionLogs\bin\Release\net7.0\publish\MySqlConnector.dll
-E:\Github\cs2-connectionlogs\ConnectionLogs\bin\Release\net7.0\publish\Nexd.MySQL.dll
-E:\Github\cs2-connectionlogs\ConnectionLogs\bin\Release\net7.0\publish\CounterStrikeSharp.API.dll
