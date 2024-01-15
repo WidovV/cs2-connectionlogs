@@ -26,7 +26,7 @@ internal class DiscordClass
             return messageBuilder.ToString();
         }
 
-        messageBuilder.Append($" [{player.IpAddress.Split(':')[0]}](<https://geoiplookup.net/ip/{player.IpAddress.Split(':')[0]}>)");
+        messageBuilder.Append($" [{player.IpAddress.Split(':')[0]}](<https://www.iplocation.net/ip-lookup/{player.IpAddress.Split(':')[0]}>)");
         messageBuilder.Append($" {connectTypeString} {serverName}");
 
         return messageBuilder.ToString();
