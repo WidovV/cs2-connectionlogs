@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "E:\\Github\\cs2-connectionlogs\\ConnectionLogs\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{5054EBD7-937D-4214-867D-E1B66ECA05A8}|ConnectionLogs.csproj|e:\\github\\cs2-connectionlogs\\connectionlogs\\connectionlogs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5054EBD7-937D-4214-867D-E1B66ECA05A8}|ConnectionLogs.csproj|solutionrelative:connectionlogs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5054EBD7-937D-4214-867D-E1B66ECA05A8}|ConnectionLogs.csproj|e:\\github\\cs2-connectionlogs\\connectionlogs\\queries.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5054EBD7-937D-4214-867D-E1B66ECA05A8}|ConnectionLogs.csproj|solutionrelative:queries.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{5054EBD7-937D-4214-867D-E1B66ECA05A8}|ConnectionLogs.csproj|e:\\github\\cs2-connectionlogs\\connectionlogs\\connectionlogs.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{5054EBD7-937D-4214-867D-E1B66ECA05A8}|ConnectionLogs.csproj|solutionrelative:connectionlogs.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
@@ -15,16 +23,8 @@
       "RelativeMoniker": "D:0:0:{5054EBD7-937D-4214-867D-E1B66ECA05A8}|ConnectionLogs.csproj|solutionrelative:discordclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5054EBD7-937D-4214-867D-E1B66ECA05A8}|ConnectionLogs.csproj|e:\\github\\cs2-connectionlogs\\connectionlogs\\connectionlogs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5054EBD7-937D-4214-867D-E1B66ECA05A8}|ConnectionLogs.csproj|solutionrelative:connectionlogs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5054EBD7-937D-4214-867D-E1B66ECA05A8}|ConnectionLogs.csproj|e:\\github\\cs2-connectionlogs\\connectionlogs\\cph.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5054EBD7-937D-4214-867D-E1B66ECA05A8}|ConnectionLogs.csproj|solutionrelative:cph.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5054EBD7-937D-4214-867D-E1B66ECA05A8}|ConnectionLogs.csproj|e:\\github\\cs2-connectionlogs\\connectionlogs\\queries.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5054EBD7-937D-4214-867D-E1B66ECA05A8}|ConnectionLogs.csproj|solutionrelative:queries.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5054EBD7-937D-4214-867D-E1B66ECA05A8}|ConnectionLogs.csproj|e:\\github\\cs2-connectionlogs\\connectionlogs\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -41,7 +41,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -65,8 +65,8 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ConnectionLogs",
+              "DocumentIndex": 2,
+              "Title": "ConnectionLogs.csproj",
               "DocumentMoniker": "E:\\Github\\cs2-connectionlogs\\ConnectionLogs\\ConnectionLogs.csproj",
               "RelativeDocumentMoniker": "ConnectionLogs.csproj",
               "ToolTip": "E:\\Github\\cs2-connectionlogs\\ConnectionLogs\\ConnectionLogs.csproj",
@@ -78,13 +78,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "ConnectionLogs.cs",
               "DocumentMoniker": "E:\\Github\\cs2-connectionlogs\\ConnectionLogs\\ConnectionLogs.cs",
               "RelativeDocumentMoniker": "ConnectionLogs.cs",
               "ToolTip": "E:\\Github\\cs2-connectionlogs\\ConnectionLogs\\ConnectionLogs.cs",
               "RelativeToolTip": "ConnectionLogs.cs",
-              "ViewState": "AQIAAAoAAAAAAAAAAAAqwCIAAABIAAAA",
+              "ViewState": "AQIAAGMAAAAAAAAAAAAAAHYAAAA9AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2023-11-05T17:34:28.938Z",
               "EditorCaption": ""
@@ -104,7 +104,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "CPH.cs",
               "DocumentMoniker": "E:\\Github\\cs2-connectionlogs\\ConnectionLogs\\CPH.cs",
               "RelativeDocumentMoniker": "CPH.cs",
@@ -117,7 +117,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "DiscordClass.cs",
               "DocumentMoniker": "E:\\Github\\cs2-connectionlogs\\ConnectionLogs\\DiscordClass.cs",
               "RelativeDocumentMoniker": "DiscordClass.cs",
@@ -130,7 +130,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Cfg.cs",
               "DocumentMoniker": "E:\\Github\\cs2-connectionlogs\\ConnectionLogs\\Cfg.cs",
               "RelativeDocumentMoniker": "Cfg.cs",
@@ -156,16 +156,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
               "Title": "Queries.cs",
               "DocumentMoniker": "E:\\Github\\cs2-connectionlogs\\ConnectionLogs\\Queries.cs",
               "RelativeDocumentMoniker": "Queries.cs",
               "ToolTip": "E:\\Github\\cs2-connectionlogs\\ConnectionLogs\\Queries.cs",
               "RelativeToolTip": "Queries.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAAgwA4AAABmAAAA",
+              "ViewState": "AQIAABEAAAAAAAAAAAAnwBgAAAA0AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2023-11-05T17:34:45.91Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             }
           ]
         }
