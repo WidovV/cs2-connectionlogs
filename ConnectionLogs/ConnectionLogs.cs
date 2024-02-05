@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Linq;
+using System.Reflection;
 using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
 using CounterStrikeSharp.API.Core.Attributes.Registration;
@@ -25,15 +26,10 @@ public class ConnectionLogs : BasePlugin, IPluginConfig<StandardConfig>
     public override void Load(bool hotReload)
     {
         _db = new(Config.DatabaseHost ?? string.Empty, Config.DatabaseUser ?? string.Empty, Config.DatabasePassword ?? string.Empty, Config.DatabaseName ?? string.Empty, Config.DatabasePort);
-        _db.ExecuteNonQueryAsync(@"CREATE TABLE IF NOT EXISTS `Users` (
-                                        `Id` int(11) NOT NULL AUTO_INCREMENT,
-                                        `SteamId` varchar(18) NOT NULL,
-                                        `ClientName` varchar(128) NOT NULL,
-                                        `ConnectedAt` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-                                        `IpAddress` varchar(16) DEFAULT NULL,
-                                        PRIMARY KEY (`Id`),
-                                        UNIQUE KEY `SteamId` (`SteamId`)
-                                    );");
+        if (Config.StoreInDatabase)
+        {
+            Queries.CreateTable(_db);
+        }
 
         RegisterListener<Listeners.OnClientDisconnect>(Listener_OnClientDisconnectHandler);
         RegisterListener<Listeners.OnClientPutInServer>(Listener_OnClientPutInServerHandler);
@@ -46,7 +42,7 @@ public class ConnectionLogs : BasePlugin, IPluginConfig<StandardConfig>
     {
         CCSPlayerController player = Utilities.GetPlayerFromSlot(playerSlot);
 
-        if (player.IsBot || !IsValid.Client(playerSlot + 1))
+        if (player == null || !player.IsValid || player.IsBot)
         {
             return;
         }
@@ -58,7 +54,7 @@ public class ConnectionLogs : BasePlugin, IPluginConfig<StandardConfig>
 
         if (Config.SendMessageToDiscord)
         {
-            new DiscordClass().SendMessage(Config, true, player, _serverName);
+            DiscordClass.SendMessage(Config, true, player, _serverName);
         }
     }
 
@@ -67,14 +63,14 @@ public class ConnectionLogs : BasePlugin, IPluginConfig<StandardConfig>
     {
         CCSPlayerController player = Utilities.GetPlayerFromSlot(playerSlot);
 
-        if (player.IsBot || !IsValid.Client(playerSlot + 1))
+        if (player == null || !player.IsValid || player.IsBot)
         {
             return;
         }
 
         if (Config.SendMessageToDiscord)
         {
-            new DiscordClass().SendMessage(Config, false, player, _serverName);
+            DiscordClass.SendMessage(Config, false, player, _serverName);
         }
     }
 
@@ -108,11 +104,11 @@ public class ConnectionLogs : BasePlugin, IPluginConfig<StandardConfig>
         {
             if (!validPlayer)
             {
-                Server.PrintToConsole($"{p.ClientName} ({p.SteamId}) last joined: {p.ConnectedAt}");
+                Server.PrintToConsole($"{p.ClientName} ({p.SteamId}) First joined: {p.ConnectedAt} | Last seen: {p.LastSeen}");
                 continue;
             }
 
-            player?.PrintToChat($"{Config.ChatPrefix} {p.ClientName} ({p.SteamId}) last joined: {p.ConnectedAt}");
+            player?.PrintToChat($"{Config.ChatPrefix} {p.ClientName} ({p.SteamId}) First joined: {p.ConnectedAt} | last seen {p.LastSeen}");
         }
     }
 

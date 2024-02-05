@@ -13,7 +13,7 @@ internal class DiscordClass
     /// <param name="connectType">A boolean indicating whether the player has connected or disconnected.</param>
     /// <param name="player">The player whose connection status is being logged.</param>
     /// <returns>A string containing the player's name, Steam ID, connection status, and timestamp.</returns>
-    private string DiscordContent(StandardConfig standardConfig, bool connectType, CCSPlayerController player, string serverName)
+    private static string DiscordContent(StandardConfig standardConfig, bool connectType, CCSPlayerController player, string serverName)
     {
         string connectTypeString = connectType ? "connected to" : "disconnected from";
 
@@ -39,7 +39,7 @@ internal class DiscordClass
     /// <param name="webhook">The Discord webhook URL to send the message to.</param>
     /// <param name="connectType">A boolean indicating whether the player is connecting or disconnecting.</param>
     /// <param name="player">The CCSPlayerController object representing the player.</param>
-    public void SendMessage(StandardConfig standardConfig, bool connectType, CCSPlayerController player, string serverName)
+    public static void SendMessage(StandardConfig standardConfig, bool connectType, CCSPlayerController player, string serverName)
     {
         try
         {

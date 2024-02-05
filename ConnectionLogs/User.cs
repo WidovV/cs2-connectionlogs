@@ -12,5 +12,6 @@ namespace ConnectionLogs
         public string SteamId { get; set; }
         public string ClientName { get; set; }
         public DateTime ConnectedAt { get; set; }
+        public DateTime LastSeen { get; set; }
     }
 }
