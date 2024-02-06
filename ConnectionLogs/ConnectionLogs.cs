@@ -13,7 +13,7 @@ public class ConnectionLogs : BasePlugin, IPluginConfig<StandardConfig>
 {
     public override string ModuleName => "Connection logs";
 
-    public override string ModuleVersion => "0.3";
+    public override string ModuleVersion => "0.4";
 
     public override string ModuleAuthor => "WidovV";
     public override string ModuleDescription => "Logs client connections to a database and discord.";
