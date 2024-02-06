@@ -32,21 +32,17 @@ namespace ConnectionLogs
                                         );").Result;
 
 
-                Console.WriteLine("Altering table...");
                 db.ExecuteNonQueryAsync(@"ALTER TABLE `Users` ADD COLUMN IF NOT EXISTS LastSeen timestamp DEFAULT current_timestamp() ON UPDATE current_timestamp()");
 
-                Console.WriteLine("Checking for column update...");
                 MySqlQueryResult? columnInfo = db.ExecuteQueryAsync(@"SELECT EXTRA FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'Users' AND COLUMN_NAME = 'ConnectedAt';").Result;
 
-                Console.WriteLine("Getting the first column's information");
                 KeyValuePair<int, MySqlFieldValue>? pair = columnInfo.FirstOrDefault();
 
 
-                Console.WriteLine("Checking if the column has the \"on update\" attribute");
                 if (pair.Value.Value["EXTRA"].ToString().Contains("on update"))
                 {
-                    Console.WriteLine("Column has on update attribute.");
                     db.ExecuteNonQueryAsync(@"ALTER TABLE `Users` MODIFY COLUMN `ConnectedAt` timestamp NULL DEFAULT current_timestamp()");
+                    Console.WriteLine("Updated column `ConnectedAt´ in `Users` table.");
                 }
 
                 if (result != 1)
