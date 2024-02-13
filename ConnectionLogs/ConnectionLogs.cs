@@ -49,7 +49,7 @@ public class ConnectionLogs : BasePlugin, IPluginConfig<StandardConfig>
 
         if (Config.StoreInDatabase)
         {
-            Queries.InsertNewClient(_db, player, player.IpAddress?.Split(':')[0] ?? string.Empty);
+            Queries.InsertNewClient(_db, player);
         }
 
         if (Config.SendMessageToDiscord)
