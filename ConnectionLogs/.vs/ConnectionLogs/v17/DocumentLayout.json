@@ -1,29 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\github\\cs2-connectionlogs\\ConnectionLogs\\",
+  "WorkspaceRootPath": "E:\\Github\\cs2-connectionlogs\\ConnectionLogs\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5054EBD7-937D-4214-867D-E1B66ECA05A8}|ConnectionLogs.csproj|c:\\github\\cs2-connectionlogs\\connectionlogs\\connectionlogs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5054EBD7-937D-4214-867D-E1B66ECA05A8}|ConnectionLogs.csproj|solutionrelative:connectionlogs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5054EBD7-937D-4214-867D-E1B66ECA05A8}|ConnectionLogs.csproj|c:\\github\\cs2-connectionlogs\\connectionlogs\\cfg.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5054EBD7-937D-4214-867D-E1B66ECA05A8}|ConnectionLogs.csproj|solutionrelative:cfg.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5054EBD7-937D-4214-867D-E1B66ECA05A8}|ConnectionLogs.csproj|c:\\github\\cs2-connectionlogs\\connectionlogs\\queries.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5054EBD7-937D-4214-867D-E1B66ECA05A8}|ConnectionLogs.csproj|solutionrelative:queries.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5054EBD7-937D-4214-867D-E1B66ECA05A8}|ConnectionLogs.csproj|c:\\github\\cs2-connectionlogs\\connectionlogs\\discordclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5054EBD7-937D-4214-867D-E1B66ECA05A8}|ConnectionLogs.csproj|solutionrelative:discordclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5054EBD7-937D-4214-867D-E1B66ECA05A8}|ConnectionLogs.csproj|c:\\github\\cs2-connectionlogs\\connectionlogs\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5054EBD7-937D-4214-867D-E1B66ECA05A8}|ConnectionLogs.csproj|solutionrelative:user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5054EBD7-937D-4214-867D-E1B66ECA05A8}|ConnectionLogs.csproj|c:\\github\\cs2-connectionlogs\\connectionlogs\\connectionlogs.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "AbsoluteMoniker": "D:0:0:{5054EBD7-937D-4214-867D-E1B66ECA05A8}|ConnectionLogs.csproj|e:\\github\\cs2-connectionlogs\\connectionlogs\\connectionlogs.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{5054EBD7-937D-4214-867D-E1B66ECA05A8}|ConnectionLogs.csproj|solutionrelative:connectionlogs.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
@@ -37,11 +17,28 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{f5cd1b51-c771-5648-966f-646d419b1e7c}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ConnectionLogs",
+              "DocumentMoniker": "E:\\Github\\cs2-connectionlogs\\ConnectionLogs\\ConnectionLogs.csproj",
+              "RelativeDocumentMoniker": "ConnectionLogs.csproj",
+              "ToolTip": "E:\\Github\\cs2-connectionlogs\\ConnectionLogs\\ConnectionLogs.csproj",
+              "RelativeToolTip": "ConnectionLogs.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-03-27T11:11:25.213Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
@@ -49,85 +46,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ConnectionLogs.csproj",
-              "DocumentMoniker": "C:\\github\\cs2-connectionlogs\\ConnectionLogs\\ConnectionLogs.csproj",
-              "RelativeDocumentMoniker": "ConnectionLogs.csproj",
-              "ToolTip": "C:\\github\\cs2-connectionlogs\\ConnectionLogs\\ConnectionLogs.csproj",
-              "RelativeToolTip": "ConnectionLogs.csproj",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-01-15T19:24:50.761Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ConnectionLogs.cs",
-              "DocumentMoniker": "C:\\github\\cs2-connectionlogs\\ConnectionLogs\\ConnectionLogs.cs",
-              "RelativeDocumentMoniker": "ConnectionLogs.cs",
-              "ToolTip": "C:\\github\\cs2-connectionlogs\\ConnectionLogs\\ConnectionLogs.cs",
-              "RelativeToolTip": "ConnectionLogs.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAwAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-11-05T17:34:28.938Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "DiscordClass.cs",
               "DocumentMoniker": "E:\\Github\\cs2-cph\\plugins\\MetaInfoBlocker\\DiscordClass.cs",
+              "RelativeDocumentMoniker": "..\\..\\cs2-cph\\plugins\\MetaInfoBlocker\\DiscordClass.cs",
               "ToolTip": "E:\\Github\\cs2-cph\\plugins\\MetaInfoBlocker\\DiscordClass.cs",
+              "RelativeToolTip": "..\\..\\cs2-cph\\plugins\\MetaInfoBlocker\\DiscordClass.cs",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-11-23T00:29:21.598Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "DiscordClass.cs",
-              "DocumentMoniker": "C:\\github\\cs2-connectionlogs\\ConnectionLogs\\DiscordClass.cs",
-              "RelativeDocumentMoniker": "DiscordClass.cs",
-              "ToolTip": "C:\\github\\cs2-connectionlogs\\ConnectionLogs\\DiscordClass.cs",
-              "RelativeToolTip": "DiscordClass.cs",
-              "ViewState": "AQIAACMAAAAAAAAAAAAQwDoAAAAPAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-11-05T17:46:23.405Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CFG.cs",
-              "DocumentMoniker": "C:\\github\\cs2-connectionlogs\\ConnectionLogs\\CFG.cs",
-              "RelativeDocumentMoniker": "CFG.cs",
-              "ToolTip": "C:\\github\\cs2-connectionlogs\\ConnectionLogs\\CFG.cs",
-              "RelativeToolTip": "CFG.cs",
-              "ViewState": "AQIAAAcAAAAAAAAAAAAYwBIAAAAjAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-11-15T15:54:55.898Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\github\\cs2-connectionlogs\\ConnectionLogs\\User.cs",
-              "RelativeDocumentMoniker": "User.cs",
-              "ToolTip": "C:\\github\\cs2-connectionlogs\\ConnectionLogs\\User.cs",
-              "RelativeToolTip": "User.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAqwA4AAAAuAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-11-05T17:35:13.014Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Queries.cs",
-              "DocumentMoniker": "C:\\github\\cs2-connectionlogs\\ConnectionLogs\\Queries.cs",
-              "RelativeDocumentMoniker": "Queries.cs",
-              "ToolTip": "C:\\github\\cs2-connectionlogs\\ConnectionLogs\\Queries.cs",
-              "RelativeToolTip": "Queries.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAABJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-11-05T17:34:45.91Z"
+              "WhenOpened": "2023-11-23T00:29:21.598Z",
+              "EditorCaption": ""
             }
           ]
         }
