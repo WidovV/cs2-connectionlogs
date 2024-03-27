@@ -1,3 +1,3 @@
 @echo off 
-dotnet publish -f net7.0 -c Release 
+dotnet publish -f net8.0 -c Release 
 pause 
